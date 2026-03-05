@@ -5,6 +5,7 @@ import os
 import subprocess
 import sys
 import re
+import time  # 添加time模块
 
 def get_base_filename():
     """获取用户输入的基础文件名"""
@@ -94,6 +95,11 @@ def process_with_ffmpeg(files, base_name_without_ext, ext, directory):
                 print(f"✓ 成功处理: {output_filename}")
             else:
                 print(f"✗ 处理失败: {input_filename}")
+            
+            # 添加1秒停顿，但最后一个文件不需要停顿
+            if i < len(files) - 1:
+                print("等待1秒后继续下一个文件...")
+                time.sleep(1)
                 
         except FileNotFoundError:
             print("错误：未找到ffmpeg命令，请确保已安装ffmpeg并添加到系统路径")
