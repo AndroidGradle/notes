@@ -64,7 +64,6 @@ def process_with_ffmpeg(files, base_name_without_ext, ext, directory):
     
     for i, input_file in enumerate(files):
         # 构建输出文件名 - 直接在原文件名后面加0
-        # 获取输入文件的完整文件名（带后缀）
         input_filename = os.path.basename(input_file)
         input_name_without_ext, _ = os.path.splitext(input_filename)
         
@@ -85,23 +84,13 @@ def process_with_ffmpeg(files, base_name_without_ext, ext, directory):
         print("-" * 50)
         
         try:
-            # 执行ffmpeg命令并实时显示输出
-            process = subprocess.Popen(
+            # 使用subprocess.run替代Popen，直接与终端交互
+            result = subprocess.run(
                 ffmpeg_cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                universal_newlines=True,
-                bufsize=1
+                check=False  # 不主动抛出异常，让ffmpeg自己处理交互
             )
             
-            # 实时输出ffmpeg的信息
-            for line in process.stdout:
-                print(line, end='')
-            
-            # 等待进程结束
-            process.wait()
-            
-            if process.returncode == 0:
+            if result.returncode == 0:
                 print(f"✓ 成功处理: {output_filename}")
             else:
                 print(f"✗ 处理失败: {input_filename}")
