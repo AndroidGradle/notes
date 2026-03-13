@@ -5,7 +5,7 @@ import os
 import subprocess
 import sys
 import re
-import time
+import time  # 添加time模块
 
 def get_base_filename():
     """获取用户输入的基础文件名"""
@@ -63,9 +63,6 @@ def find_related_files(base_file):
 def process_with_ffmpeg(files, base_name_without_ext, ext, directory):
     """使用ffmpeg处理每个文件"""
     
-    # 定义ff.txt的完整路径
-    ff_file = os.path.join(directory, "ff.txt")
-    
     for i, input_file in enumerate(files):
         # 构建输出文件名 - 直接在原文件名后面加0
         input_filename = os.path.basename(input_file)
@@ -75,21 +72,10 @@ def process_with_ffmpeg(files, base_name_without_ext, ext, directory):
         output_filename = f"{input_name_without_ext}0{ext}"
         output_file = os.path.join(directory, output_filename)
         
-        # 更新ff.txt的内容为当前文件
-        try:
-            with open(ff_file, 'w') as f:
-                f.write(f"file '{input_file}'\n")
-        except Exception as e:
-            print(f"错误：写入ff.txt失败 - {e}")
-            print("程序终止")
-            sys.exit(1)
-        
-        # 构建ffmpeg命令 - 使用concat协议
+        # 构建ffmpeg命令
         ffmpeg_cmd = [
             'ffmpeg',
-            '-safe', '0',
-            '-f', 'concat',
-            '-i', ff_file,
+            '-i', input_file,
             '-c', 'copy',
             output_file
         ]
@@ -99,10 +85,10 @@ def process_with_ffmpeg(files, base_name_without_ext, ext, directory):
         print("-" * 50)
         
         try:
-            # 使用subprocess.run，直接与终端交互
+            # 使用subprocess.run替代Popen，直接与终端交互
             result = subprocess.run(
                 ffmpeg_cmd,
-                check=False
+                check=False  # 不主动抛出异常，让ffmpeg自己处理交互
             )
             
             if result.returncode == 0:
