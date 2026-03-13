@@ -72,10 +72,21 @@ def process_with_ffmpeg(files, base_name_without_ext, ext, directory):
         output_filename = f"{input_name_without_ext}0{ext}"
         output_file = os.path.join(directory, output_filename)
         
-        # 构建ffmpeg命令
+        # 先更新ff.txt的内容为当前文件
+        try:
+            with open("ff.txt", 'w') as f:
+                f.write(f"file '{input_file}'\n")
+        except Exception as e:
+            print(f"错误：写入ff.txt失败 - {e}")
+            print("程序终止")
+            sys.exit(1)
+        
+        # 构建ffmpeg命令 - 使用concat协议，ff.txt为固定路径
         ffmpeg_cmd = [
             'ffmpeg',
-            '-i', input_file,
+            '-safe', '0',
+            '-f', 'concat',
+            '-i', 'ff.txt',
             '-c', 'copy',
             output_file
         ]
