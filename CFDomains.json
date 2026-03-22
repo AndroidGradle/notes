@@ -1,6 +1,7 @@
 {
   "fast": [
     "cloudflare.182682.xyz",
+    "cf.cloudflare.182682.xyz",
     "cf.tencentapp.cn",
     "nekocloud.tencentapp.cn"
   ],
@@ -14,8 +15,9 @@
     "cdns.doon.eu.org",
     "cf.090227.xyz",
     "cf.0sm.com",
+    "cf.130519.xyz",
     "cf.877774.xyz",
-    "cf.cloudflare.182682.xyz",
+    "cf.danfeng.eu.org",
     "cf.zhetengsha.eu.org",
     "cloudflare.seeck.cn",
     "freeyx.cloudflare88.eu.org",
@@ -23,6 +25,7 @@
     "ns.cloudflare.com",
     "saas.sin.fan",
     "store.ubi.com",
+    "sub.danfeng.eu.org",
     "sub.danfeng.eu.org",
     "v2.dabache.top",
     "vip1.kaixincloud.top",
