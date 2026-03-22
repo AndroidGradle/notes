@@ -1,0 +1,34 @@
+{
+  "fast": [
+    "cloudflare.182682.xyz",
+    "cf.tencentapp.cn",
+    "nekocloud.tencentapp.cn"
+  ],
+  "valid": [
+    "1357900.xyz",
+    "ali.nonull.pp.ua",
+    "cdn.2020111.xyz",
+    "cdn.204910.best",
+    "cdn.9889888.xyz",
+    "cdn.tzpro.xyz",
+    "cdns.doon.eu.org",
+    "cf.090227.xyz",
+    "cf.0sm.com",
+    "cf.877774.xyz",
+    "cf.cloudflare.182682.xyz",
+    "cf.zhetengsha.eu.org",
+    "cloudflare.seeck.cn",
+    "freeyx.cloudflare88.eu.org",
+    "nrtcfdns.zone.id",
+    "ns.cloudflare.com",
+    "saas.sin.fan",
+    "store.ubi.com",
+    "sub.danfeng.eu.org",
+    "v2.dabache.top",
+    "vip1.kaixincloud.top",
+    "vip2.kaixincloud.top",
+    "vip3.kaixincloud.top",
+    "youxuan.cf.090227.xyz"
+  ],
+  "invalid": []
+}
