@@ -5,11 +5,16 @@ import json
 import subprocess
 import re
 
-def ping_domain(domain, count=4):
+# 可配置参数
+PING_COUNT = 4          # 发送ping包数量
+PING_TIMEOUT = 10       # 单个包超时时间(秒)
+FAST_THRESHOLD = 100    # fast阈值(毫秒)，可修改此值
+
+def ping_domain(domain, count=PING_COUNT, timeout=PING_TIMEOUT):
     """发送多个ping包，返回平均延迟(ms)或None"""
     try:
-        result = subprocess.run(['ping', '-c', str(count), '-W', '10', domain], 
-                              capture_output=True, timeout=12)
+        result = subprocess.run(['ping', '-c', str(count), '-W', str(timeout), domain], 
+                              capture_output=True, timeout=timeout+2)
         if result.returncode == 0:
             output = result.stdout.decode()
             
@@ -38,7 +43,8 @@ def main():
         data = json.load(f)
     
     domains = data.get('valid', [])
-    print(f"测试 {len(domains)} 个域名（每个发4个包取平均）...\n")
+    print(f"测试 {len(domains)} 个域名（每个发{PING_COUNT}个包取平均）...")
+    print(f"fast阈值: {FAST_THRESHOLD}ms\n")
     
     results = []
     
@@ -48,7 +54,7 @@ def main():
         
         if ping_ms:
             results.append((domain, ping_ms))
-            if ping_ms <= 100:
+            if ping_ms <= FAST_THRESHOLD:
                 print(f"✓ {ping_ms:.1f}ms (fast)")
             else:
                 print(f"✓ {ping_ms:.1f}ms (valid)")
@@ -57,12 +63,12 @@ def main():
             print("✗ 超时")
     
     # 分类并排序
-    fast = [d for d, ms in results if ms and ms <= 100]
-    valid = [d for d, ms in results if ms and ms > 100]
+    fast = [d for d, ms in results if ms and ms <= FAST_THRESHOLD]
+    valid = [d for d, ms in results if ms and ms > FAST_THRESHOLD]
     invalid = [d for d, ms in results if ms is None]
     
     # fast按ping值排序
-    fast_sorted = [d for d, ms in sorted([(d, ms) for d, ms in results if ms and ms <= 100], key=lambda x: x[1])]
+    fast_sorted = [d for d, ms in sorted([(d, ms) for d, ms in results if ms and ms <= FAST_THRESHOLD], key=lambda x: x[1])]
     
     # valid和invalid按原域名排序
     valid_sorted = sorted(valid)
@@ -78,8 +84,8 @@ def main():
         json.dump(data, f, indent=2)
     
     print(f"\n完成！")
-    print(f"  fast (≤100ms): {len(fast_sorted)} 个")
-    print(f"  valid (>100ms): {len(valid_sorted)} 个")
+    print(f"  fast (≤{FAST_THRESHOLD}ms): {len(fast_sorted)} 个")
+    print(f"  valid (>{FAST_THRESHOLD}ms): {len(valid_sorted)} 个")
     print(f"  invalid: {len(invalid_sorted)} 个")
 
 if __name__ == "__main__":
