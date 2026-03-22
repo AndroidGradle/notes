@@ -13,23 +13,23 @@ def ping_domain(domain, count=4):
         if result.returncode == 0:
             output = result.stdout.decode()
             
-            # 方法1: 提取所有time=值
+            # 提取平均值 (格式: rtt min/avg/max/mdev = 143.811/150.337/167.360/9.863 ms)
+            match = re.search(r'rtt.*= (\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)', output)
+            if match:
+                return float(match.group(2))
+            
+            # 备用方案: 提取avg字段
+            match = re.search(r'avg[ =](\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)', output)
+            if match:
+                return float(match.group(2))
+            
+            # 最后的备用方案: 手动计算
             times = re.findall(r'time[= ](\d+\.?\d*)\s*ms', output)
             if times:
                 times = [float(t) for t in times]
                 return sum(times) / len(times)
-            
-            # 方法2: 提取avg平均值
-            avg_match = re.search(r'avg[ =](\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)', output)
-            if avg_match:
-                return float(avg_match.group(2))
-            
-            # 方法3: 提取rtt行
-            rtt_match = re.search(r'rtt.*= (\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)', output)
-            if rtt_match:
-                return float(rtt_match.group(2))
-    except Exception as e:
-        print(f"错误: {e}")
+    except:
+        pass
     return None
 
 def main():
