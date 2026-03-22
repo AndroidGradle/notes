@@ -3,32 +3,33 @@
 
 import json
 import subprocess
-import time
+import re
 
 def ping_domain(domain, count=4):
     """发送多个ping包，返回平均延迟(ms)或None"""
     try:
-        # 发送4个ping包，超时10秒
         result = subprocess.run(['ping', '-c', str(count), '-W', '10', domain], 
                               capture_output=True, timeout=12)
         if result.returncode == 0:
             output = result.stdout.decode()
-            # 提取平均时间 (Linux/Android格式: rtt min/avg/max/mdev = ...)
-            if 'avg' in output:
-                avg_str = output.split('avg')[1].split('/')[1]
-                ping_ms = float(avg_str)
-                return ping_ms
-            # 备用提取方式
-            elif 'time=' in output:
-                times = []
-                for line in output.split('\n'):
-                    if 'time=' in line:
-                        time_str = line.split('time=')[1].split(' ')[0]
-                        times.append(float(time_str))
-                if times:
-                    return sum(times) / len(times)
-    except:
-        pass
+            
+            # 方法1: 提取所有time=值
+            times = re.findall(r'time[= ](\d+\.?\d*)\s*ms', output)
+            if times:
+                times = [float(t) for t in times]
+                return sum(times) / len(times)
+            
+            # 方法2: 提取avg平均值
+            avg_match = re.search(r'avg[ =](\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)', output)
+            if avg_match:
+                return float(avg_match.group(2))
+            
+            # 方法3: 提取rtt行
+            rtt_match = re.search(r'rtt.*= (\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)/(\d+\.?\d*)', output)
+            if rtt_match:
+                return float(rtt_match.group(2))
+    except Exception as e:
+        print(f"错误: {e}")
     return None
 
 def main():
@@ -39,7 +40,7 @@ def main():
     domains = data.get('valid', [])
     print(f"测试 {len(domains)} 个域名（每个发4个包取平均）...\n")
     
-    results = []  # 存储 (domain, ping_ms)
+    results = []
     
     for i, domain in enumerate(domains, 1):
         print(f"[{i}/{len(domains)}] {domain}...", end=' ', flush=True)
