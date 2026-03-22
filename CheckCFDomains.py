@@ -42,7 +42,12 @@ def main():
     with open('CFDomains.json', 'r') as f:
         data = json.load(f)
     
+    # 获取要测试的域名（valid数组）
     domains = data.get('valid', [])
+    if not domains:
+        print("valid数组为空，无需测试")
+        return
+    
     print(f"测试 {len(domains)} 个域名（每个发{PING_COUNT}个包取平均）...")
     print(f"fast阈值: {FAST_THRESHOLD}ms\n")
     
@@ -62,17 +67,27 @@ def main():
             results.append((domain, None))
             print("✗ 超时")
     
-    # 分类并排序
-    fast = [d for d, ms in results if ms and ms <= FAST_THRESHOLD]
-    valid = [d for d, ms in results if ms and ms > FAST_THRESHOLD]
-    invalid = [d for d, ms in results if ms is None]
+    # 分类本次测试结果
+    new_fast = [d for d, ms in results if ms and ms <= FAST_THRESHOLD]
+    new_valid = [d for d, ms in results if ms and ms > FAST_THRESHOLD]
+    new_invalid = [d for d, ms in results if ms is None]
     
-    # fast按ping值排序
+    # 保留原有的fast和invalid数据（去重）
+    existing_fast = data.get('fast', [])
+    existing_invalid = data.get('invalid', [])
+    
+    # fast按ping值排序（只对本次测试的fast排序，原有的保持不变）
     fast_sorted = [d for d, ms in sorted([(d, ms) for d, ms in results if ms and ms <= FAST_THRESHOLD], key=lambda x: x[1])]
+    # 将原有fast中不在本次测试中的域名追加到末尾
+    for d in existing_fast:
+        if d not in new_fast:
+            fast_sorted.append(d)
     
-    # valid和invalid按原域名排序
-    valid_sorted = sorted(valid)
-    invalid_sorted = sorted(invalid)
+    # valid替换为本次测试的valid（覆盖）
+    valid_sorted = sorted(new_valid)
+    
+    # invalid合并原有和新增（去重）
+    invalid_sorted = sorted(list(set(existing_invalid + new_invalid)))
     
     # 更新数据
     data['fast'] = fast_sorted
@@ -84,9 +99,9 @@ def main():
         json.dump(data, f, indent=2)
     
     print(f"\n完成！")
-    print(f"  fast (≤{FAST_THRESHOLD}ms): {len(fast_sorted)} 个")
-    print(f"  valid (>{FAST_THRESHOLD}ms): {len(valid_sorted)} 个")
-    print(f"  invalid: {len(invalid_sorted)} 个")
+    print(f"  fast (≤{FAST_THRESHOLD}ms): {len(fast_sorted)} 个 (新增: {len(new_fast)})")
+    print(f"  valid: {len(valid_sorted)} 个 (已更新)")
+    print(f"  invalid: {len(invalid_sorted)} 个 (新增: {len(new_invalid)})")
 
 if __name__ == "__main__":
     main()
