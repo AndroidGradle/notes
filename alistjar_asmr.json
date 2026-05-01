@@ -1,0 +1,41 @@
+{
+  "drives": [
+    {
+      "name": "ASMR",
+      "search": true,
+      "searchable": true,
+      "server": "https://www.asmrgay.com/"
+    },
+    {
+      "name": "露珀塔",
+      "search": false,
+      "searchable": false,
+      "server": "https://www.asmrgay.com/asmr/中文音声/露珀塔"
+    },
+    {
+      "name": "迷鹿",
+      "search": false,
+      "searchable": false,
+      "server": "https://www.asmrgay.com/asmr/中文音声/迷鹿"
+    },
+    {
+      "name": "桥桥超温柔",
+      "search": false,
+      "searchable": false,
+      "server": "https://www.asmrgay.com/asmr/中文音声/桥桥超温柔"
+    },
+    {
+      "name": "娆娆",
+      "search": false,
+      "searchable": false,
+      "server": "https://www.asmrgay.com/asmr/中文音声/娆娆"
+    },
+    {
+      "name": "有毒的小蘑菇酱",
+      "search": false,
+      "searchable": false,
+      "server": "https://www.asmrgay.com/asmr/中文音声/有毒的小蘑菇酱"
+    }
+  ],
+  "danmu": true
+}
