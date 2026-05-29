@@ -19,6 +19,12 @@
       "server": "https://www.asmrgay.com/asmr/中文音声/B站口欲"
     },
     {
+      "name": "黧落大总攻",
+      "search": false,
+      "searchable": false,
+      "server": "https://www.asmrgay.com/asmr/中文音声/黧落大总攻"
+    },
+    {
       "name": "露珀塔",
       "search": false,
       "searchable": false,
@@ -59,6 +65,12 @@
       "search": false,
       "searchable": false,
       "server": "https://www.asmrgay.com/asmr/中文音声/是喵宝呀"
+    },
+    {
+      "name": "小馨又没睡觉",
+      "search": false,
+      "searchable": false,
+      "server": "https://www.asmrgay.com/asmr/中文音声/小馨又没睡觉"
     },
     {
       "name": "有毒的小蘑菇酱",
