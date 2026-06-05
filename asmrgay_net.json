@@ -2,9 +2,9 @@
     "drivers": [
         {
             "key": "asmrgaynet",
-            "name": "ASMR",
+            "name": "ASMR网盘",
             "type": "alist",
-            "api": "https://www.asmrgay.net/",
+            "api": "https://www.asmrgay.net",
             "ext": "root=/"
         }
     ],
@@ -14,14 +14,8 @@
             "name": "AD学姐",
             "type": 5,
             "driver": "asmrgaynet",
-            "ext": "root=/asmr/中文音声/AD学姐"
-        },
-        {
-            "key": "hjj",
-            "name": "胡啾啾",
-            "type": 5,
-            "driver": "asmrgaynet",
-            "ext": "root=/asmr/中文音声/胡啾啾"
+            "searchable": 1,
+            "quickSearch": 1
         }
     ]
 }
