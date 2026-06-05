@@ -1,96 +1,95 @@
 {
-  "server": "https://www.asmrgay.net",
   "drives": [
     {
       "name": "ASMR",
       "search": true,
       "searchable": true,
-      "server": "{{server}}"
+      "server": "https://www.asmrgay.net/"
     },
     {
       "name": "AD学姐",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/AD学姐"
+      "server": "https://www.asmrgay.net/asmr/中文音声/AD学姐"
     },
     {
       "name": "胡啾啾",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/胡啾啾"
+      "server": "https://www.asmrgay.net/asmr/中文音声/胡啾啾"
     },
     {
       "name": "口欲",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/B站口欲"
+      "server": "https://www.asmrgay.net/asmr/中文音声/B站口欲"
     },
     {
       "name": "黧落大总攻",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/黧落大总攻"
+      "server": "https://www.asmrgay.net/asmr/中文音声/黧落大总攻"
     },
     {
       "name": "露珀塔",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/露珀塔"
+      "server": "https://www.asmrgay.net/asmr/中文音声/露珀塔"
     },
     {
       "name": "迷鹿",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/迷鹿"
+      "server": "https://www.asmrgay.net/asmr/中文音声/迷鹿"
     },
     {
       "name": "南晚姐姐",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/南晚姐姐"
+      "server": "https://www.asmrgay.net/asmr/中文音声/南晚姐姐"
     },
     {
       "name": "奶宝儿",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/B站奶宝儿"
+      "server": "https://www.asmrgay.net/asmr/中文音声/B站奶宝儿"
     },
     {
       "name": "奶斯",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/奶斯姐姐"
+      "server": "https://www.asmrgay.net/asmr/中文音声/奶斯姐姐"
     },
     {
       "name": "桥桥超温柔",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/桥桥超温柔"
+      "server": "https://www.asmrgay.net/asmr/中文音声/桥桥超温柔"
     },
     {
       "name": "娆娆",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/娆娆"
+      "server": "https://www.asmrgay.net/asmr/中文音声/娆娆"
     },
     {
       "name": "是喵宝呀",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/是喵宝呀"
+      "server": "https://www.asmrgay.net/asmr/中文音声/是喵宝呀"
     },
     {
       "name": "小馨又没睡觉",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/小馨又没睡觉"
+      "server": "https://www.asmrgay.net/asmr/中文音声/小馨又没睡觉"
     },
     {
       "name": "有毒的小蘑菇酱",
       "search": false,
       "searchable": false,
-      "server": "{{server}}/asmr/中文音声/有毒的小蘑菇酱"
+      "server": "https://www.asmrgay.net/asmr/中文音声/有毒的小蘑菇酱"
     }
   ],
-  "danmu": false
+  "danmu": true
 }
