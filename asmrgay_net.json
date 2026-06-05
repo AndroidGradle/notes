@@ -1,0 +1,27 @@
+{
+    "drivers": [
+        {
+            "key": "alist",
+            "name": "ASMR",
+            "type": "json",
+            "api": "https://www.asmrgay.net/api/v1/fs/tvbox",
+            "ext": "root=/"
+        }
+    ],
+    "sites": [
+        {
+            "key": "adxj",
+            "name": "AD学姐",
+            "type": 5,
+            "driver": "alist",
+            "ext": "root=/asmr/中文音声/AD学姐"
+        },
+        {
+            "key": "hjj",
+            "name": "胡啾啾",
+            "type": 5,
+            "driver": "alist",
+            "ext": "root=/asmr/中文音声/胡啾啾"
+        }
+    ]
+}
